@@ -19,7 +19,6 @@ public class GEmoteCommand implements CommandExecutor {
 
         if(!(Sender instanceof Player)) {
 
-            GPM.getMManager().sendMessage(Sender, "Messages.command-sender-error");
             return true;
         }
 
@@ -27,7 +26,6 @@ public class GEmoteCommand implements CommandExecutor {
 
         if(!GPM.getPManager().hasPermission(Sender, "Emote")) {
 
-            GPM.getMManager().sendMessage(Sender, "Messages.command-permission-error");
             return true;
         }
 
@@ -35,17 +33,14 @@ public class GEmoteCommand implements CommandExecutor {
 
             if(!GPM.getEmoteManager().isEmoting(player)) {
 
-                GPM.getMManager().sendMessage(Sender, "Messages.action-emote-none-error");
                 return true;
             }
 
             if(!GPM.getEmoteManager().stopEmote(player)) {
 
-                GPM.getMManager().sendMessage(Sender, "Messages.action-emote-stop-error");
                 return true;
             }
 
-            GPM.getMManager().sendMessage(Sender, "Messages.action-emote-stop");
             return true;
         }
 
@@ -53,19 +48,16 @@ public class GEmoteCommand implements CommandExecutor {
 
         if(emote == null) {
 
-            GPM.getMManager().sendMessage(Sender, "Messages.action-emote-exist-error", "%Emote%", Args[0]);
             return true;
         }
 
         if(!player.isValid()) {
 
-            GPM.getMManager().sendMessage(Sender, "Messages.action-emote-now-error");
             return true;
         }
 
         if(!GPM.getEnvironmentUtil().isInAllowedWorld(player)) {
 
-            GPM.getMManager().sendMessage(Sender, "Messages.action-emote-world-error");
             return true;
         }
 
@@ -73,7 +65,6 @@ public class GEmoteCommand implements CommandExecutor {
 
             if(GPM.getWorldGuardLink() != null && !GPM.getWorldGuardLink().checkFlag(player.getLocation(), GPM.getWorldGuardLink().getFlag("emote"))) {
 
-                GPM.getMManager().sendMessage(Sender, "Messages.action-emote-region-error");
                 return true;
             }
         }

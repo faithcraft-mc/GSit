@@ -22,7 +22,6 @@ public class GSitCommand implements CommandExecutor {
 
         if(!(Sender instanceof Player)) {
 
-            GPM.getMManager().sendMessage(Sender, "Messages.command-sender-error");
             return true;
         }
 
@@ -32,7 +31,6 @@ public class GSitCommand implements CommandExecutor {
 
             if(!GPM.getPManager().hasPermission(Sender, "Sit")) {
 
-                GPM.getMManager().sendMessage(Sender, "Messages.command-permission-error");
                 return true;
             }
 
@@ -44,13 +42,11 @@ public class GSitCommand implements CommandExecutor {
 
             if(!player.isValid() || player.isSneaking() || !player.isOnGround() || player.isInsideVehicle() || player.isSleeping()) {
 
-                GPM.getMManager().sendMessage(Sender, "Messages.action-sit-now-error");
                 return true;
             }
 
             if(!GPM.getEnvironmentUtil().isInAllowedWorld(player)) {
 
-                GPM.getMManager().sendMessage(Sender, "Messages.action-sit-world-error");
                 return true;
             }
 
@@ -60,7 +56,6 @@ public class GSitCommand implements CommandExecutor {
 
             if(GPM.getCManager().MATERIALBLACKLIST.contains(block.getType())) {
 
-                GPM.getMManager().sendMessage(Sender, "Messages.action-sit-location-error");
                 return true;
             }
 
@@ -73,7 +68,6 @@ public class GSitCommand implements CommandExecutor {
 
             if(!GPM.getCManager().ALLOW_UNSAFE && !(block.getRelative(BlockFace.UP).isPassable() && !overSize && (!block.isPassable() || !GPM.getCManager().CENTER_BLOCK))) {
 
-                GPM.getMManager().sendMessage(Sender, "Messages.action-sit-location-error");
                 return true;
             }
 
@@ -81,30 +75,27 @@ public class GSitCommand implements CommandExecutor {
 
                 if(GPM.getWorldGuardLink() != null && !GPM.getWorldGuardLink().checkFlag(block.getLocation(), GPM.getWorldGuardLink().getFlag("sit"))) {
 
-                    GPM.getMManager().sendMessage(Sender, "Messages.action-sit-region-error");
                     return true;
                 }
 
                 if(GPM.getGriefPreventionLink() != null && !GPM.getGriefPreventionLink().check(block.getLocation(), player)) {
 
-                    GPM.getMManager().sendMessage(Sender, "Messages.action-sit-region-error");
                     return true;
                 }
 
                 if(GPM.getPlotSquaredLink() != null && !GPM.getPlotSquaredLink().canCreateSeat(block.getLocation(), player)) {
 
-                    GPM.getMManager().sendMessage(Sender, "Messages.action-sit-region-error");
                     return true;
                 }
             }
 
             if(!GPM.getCManager().SAME_BLOCK_REST && !GPM.getSitManager().kickSeat(block, player)) {
 
-                GPM.getMManager().sendMessage(Sender, "Messages.action-sit-kick-error");
                 return true;
             }
 
-            if(Tag.STAIRS.isTagged(block.getType()) ? GPM.getEnvironmentUtil().createSeatForStair(block, player) == null : GPM.getSitManager().createSeat(block, player) == null) GPM.getMManager().sendMessage(Sender, "Messages.action-sit-region-error");
+            if(Tag.STAIRS.isTagged(block.getType()) ? GPM.getEnvironmentUtil().createSeatForStair(block, player) == null : GPM.getSitManager().createSeat(block, player) == null) {
+            }
             return true;
         }
 
@@ -118,12 +109,10 @@ public class GSitCommand implements CommandExecutor {
 
                         GPM.getToggleManager().setCanSit(player.getUniqueId(), false);
 
-                        GPM.getMManager().sendMessage(Sender, "Messages.command-gsit-toggle-off");
                     } else {
 
                         GPM.getToggleManager().setCanSit(player.getUniqueId(), true);
 
-                        GPM.getMManager().sendMessage(Sender, "Messages.command-gsit-toggle-on");
                     }
 
                     break;
@@ -136,12 +125,10 @@ public class GSitCommand implements CommandExecutor {
 
                         GPM.getToggleManager().setCanPlayerSit(player.getUniqueId(), false);
 
-                        GPM.getMManager().sendMessage(Sender, "Messages.command-gsit-playertoggle-off");
                     } else {
 
                         GPM.getToggleManager().setCanPlayerSit(player.getUniqueId(), true);
 
-                        GPM.getMManager().sendMessage(Sender, "Messages.command-gsit-playertoggle-on");
                     }
 
                     break;

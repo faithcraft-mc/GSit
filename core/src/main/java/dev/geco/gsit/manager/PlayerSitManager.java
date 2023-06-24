@@ -33,7 +33,8 @@ public class PlayerSitManager {
 
         GPM.getEntityUtil().createPlayerSeatEntity(Target, Player);
 
-        if(GPM.getCManager().PS_SIT_MESSAGE) GPM.getMManager().sendActionBarMessage(Player, "Messages.action-playersit-info");
+        if(GPM.getCManager().PS_SIT_MESSAGE) {
+        }
 
         feature_used++;
 

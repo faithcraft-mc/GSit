@@ -18,13 +18,11 @@ public class GSitReloadCommand implements CommandExecutor {
 
         if(!(Sender instanceof Player || Sender instanceof ConsoleCommandSender || Sender instanceof RemoteConsoleCommandSender)) {
 
-            GPM.getMManager().sendMessage(Sender, "Messages.command-sender-error");
             return true;
         }
 
         if(!GPM.getPManager().hasPermission(Sender, "Reload")) {
 
-            GPM.getMManager().sendMessage(Sender, "Messages.command-permission-error");
             return true;
         }
 

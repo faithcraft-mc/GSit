@@ -98,7 +98,6 @@ public class PlayerEvents implements Listener {
 
             if(GPM.getCManager().COMMANDBLACKLIST.stream().anyMatch(message::equalsIgnoreCase)) {
 
-                GPM.getMManager().sendMessage(player, "Messages.action-blocked-error");
 
                 Event.setCancelled(true);
             }

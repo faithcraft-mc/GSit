@@ -20,7 +20,6 @@ public class GCrawlCommand implements CommandExecutor {
 
         if(!(Sender instanceof Player)) {
 
-            GPM.getMManager().sendMessage(Sender, "Messages.command-sender-error");
             return true;
         }
 
@@ -28,7 +27,6 @@ public class GCrawlCommand implements CommandExecutor {
 
         if(!GPM.getPManager().hasPermission(Sender, "Crawl")) {
 
-            GPM.getMManager().sendMessage(Sender, "Messages.command-permission-error");
             return true;
         }
 
@@ -37,7 +35,6 @@ public class GCrawlCommand implements CommandExecutor {
             String v = Bukkit.getServer().getClass().getPackage().getName();
             v = v.substring(v.lastIndexOf('.') + 1);
 
-            GPM.getMManager().sendMessage(Sender, "Messages.command-version-error", "%Version%", v);
             return true;
         }
 
@@ -51,7 +48,6 @@ public class GCrawlCommand implements CommandExecutor {
 
             if(!player.isValid() || !player.isOnGround() || player.isInsideVehicle() || player.isSleeping()) {
 
-                GPM.getMManager().sendMessage(Sender, "Messages.action-crawl-now-error");
                 return true;
             }
 
@@ -59,18 +55,17 @@ public class GCrawlCommand implements CommandExecutor {
 
                 if(!GPM.getEnvironmentUtil().isInAllowedWorld(player)) {
 
-                    GPM.getMManager().sendMessage(Sender, "Messages.action-crawl-world-error");
                     return true;
                 }
             }
 
             if(GPM.getWorldGuardLink() != null && !GPM.getWorldGuardLink().checkFlag(player.getLocation(), GPM.getWorldGuardLink().getFlag("crawl"))) {
 
-                GPM.getMManager().sendMessage(Sender, "Messages.action-crawl-region-error");
                 return true;
             }
 
-            if(GPM.getCrawlManager().startCrawl(player) == null) GPM.getMManager().sendMessage(Sender, "Messages.action-crawl-region-error");
+            if(GPM.getCrawlManager().startCrawl(player) == null) {
+            }
             return true;
         }
 
@@ -82,12 +77,10 @@ public class GCrawlCommand implements CommandExecutor {
 
                     GPM.getToggleManager().setCanCrawl(player.getUniqueId(), false);
 
-                    GPM.getMManager().sendMessage(Sender, "Messages.command-gcrawl-toggle-off");
                 } else {
 
                     GPM.getToggleManager().setCanCrawl(player.getUniqueId(), true);
 
-                    GPM.getMManager().sendMessage(Sender, "Messages.command-gcrawl-toggle-on");
                 }
             } else Bukkit.dispatchCommand(Sender, Label);
         } else Bukkit.dispatchCommand(Sender, Label);
